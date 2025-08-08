@@ -1,0 +1,87 @@
+{
+  "id": "ebgp101",
+  "name": "eBGP 101",
+  "description": "Two routers in separate ASNs exchange a single prefix via an eBGP session.",
+  "routers": [
+    {
+      "id": "r1",
+      "name": "R1",
+      "asn": 65001,
+      "routerId": "192.0.2.1",
+      "loopbacks": ["192.0.2.1"],
+      "interfaces": [],
+      "neighbors": [],
+      "afiSafi": { "ipv4": true, "ipv6": false },
+      "policy": { "routeMaps": [], "communityLists": [], "asPathLists": [], "prefixLists": [] },
+      "timers": { "keepalive": 60, "hold": 180, "connectRetry": 120 },
+      "knobs": {}
+    },
+    {
+      "id": "r2",
+      "name": "R2",
+      "asn": 65002,
+      "routerId": "198.51.100.2",
+      "loopbacks": ["198.51.100.2"],
+      "interfaces": [],
+      "neighbors": [],
+      "afiSafi": { "ipv4": true, "ipv6": false },
+      "policy": { "routeMaps": [], "communityLists": [], "asPathLists": [], "prefixLists": [] },
+      "timers": { "keepalive": 60, "hold": 180, "connectRetry": 120 },
+      "knobs": {}
+    }
+  ],
+  "neighbors": [
+    {
+      "id": "n1",
+      "localRouterId": "r1",
+      "peerRouterId": "r2",
+      "localAs": 65001,
+      "peerAs": 65002,
+      "sessionType": "eBGP",
+      "families": ["ipv4"],
+      "inRouteMaps": [],
+      "outRouteMaps": []
+    },
+    {
+      "id": "n2",
+      "localRouterId": "r2",
+      "peerRouterId": "r1",
+      "localAs": 65002,
+      "peerAs": 65001,
+      "sessionType": "eBGP",
+      "families": ["ipv4"],
+      "inRouteMaps": [],
+      "outRouteMaps": []
+    }
+  ],
+  "initialRibs": [
+    {
+      "routerId": "r1",
+      "entry": {
+        "prefix": "10.0.0.0/24",
+        "pathAttributes": {
+          "origin": "igp",
+          "asPath": [],
+          "localPref": 100
+        },
+        "source": "local",
+        "nextHop": "0.0.0.0",
+        "ageMs": 0
+      }
+    },
+    {
+      "routerId": "r2",
+      "entry": {
+        "prefix": "20.0.0.0/24",
+        "pathAttributes": {
+          "origin": "igp",
+          "asPath": [],
+          "localPref": 100
+        },
+        "source": "local",
+        "nextHop": "0.0.0.0",
+        "ageMs": 0
+      }
+    }
+  ]
+}
