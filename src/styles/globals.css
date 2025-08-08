@@ -1,0 +1,60 @@
+/* Global styles for the BGP simulator. These styles are intentionally
+ * minimal and opinionated. The theme uses the Lato font family to align
+ * with the IT Vortex brand aesthetic. The colour palette is defined
+ * using CSS variables at the :root level so that it can be easily
+ * customised. Feel free to adjust these values to more closely match
+ * your corporate guidelines.
+ */
+
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700;900&display=swap');
+
+:root {
+  /* Primary palette inspired by IT Vortex branding. The exact values
+   * should be updated with official brand swatches. */
+  --color-primary: #003C71; /* deep navy blue */
+  --color-secondary: #0369A1; /* mid tone blue */
+  --color-accent: #00ADEF; /* bright accent blue */
+  --color-background: #F7F9FC; /* off-white background */
+  --color-surface: #FFFFFF; /* white surface */
+  --color-text: #1F2937; /* dark grey for text */
+  --color-muted: #6B7280; /* muted grey for secondary text */
+  --border-radius: 6px;
+}
+
+html,
+body {
+  padding: 0;
+  margin: 0;
+  font-family: 'Lato', sans-serif;
+  background-color: var(--color-background);
+  color: var(--color-text);
+  height: 100%;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+a {
+  color: var(--color-accent);
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin: 0;
+  font-weight: 700;
+}
+
+p {
+  margin: 0;
+  line-height: 1.6;
+}
