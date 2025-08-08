@@ -74,6 +74,7 @@ export class BgpEngine {
   }
 }
 
+
 /**
  * Shape of a lab definition loaded via JSON. Labs can define
  * routers, neighbours and a set of initial RIB entries for each router.
@@ -86,3 +87,5 @@ export interface LabDefinition {
   neighbors: Neighbor[];
   initialRibs: { routerId: string; entry: RibEntry }[];
 }
+
+export type { Router, Neighbor, RibEntry } from './types';
