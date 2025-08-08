@@ -1,0 +1,124 @@
+{
+  "id": "localPrefVsMed",
+  "name": "Local Preference vs MED",
+  "description": "Compare local preference and MED attributes on two inbound routes and observe how they influence best path selection.",
+  "routers": [
+    {
+      "id": "r1",
+      "name": "R1",
+      "asn": 65000,
+      "routerId": "203.0.113.1",
+      "loopbacks": ["203.0.113.1"],
+      "interfaces": [],
+      "neighbors": [],
+      "afiSafi": { "ipv4": true, "ipv6": false },
+      "policy": { "routeMaps": [], "communityLists": [], "asPathLists": [], "prefixLists": [] },
+      "timers": { "keepalive": 60, "hold": 180, "connectRetry": 120 },
+      "knobs": {}
+    },
+    {
+      "id": "r2",
+      "name": "R2",
+      "asn": 65100,
+      "routerId": "203.0.113.2",
+      "loopbacks": ["203.0.113.2"],
+      "interfaces": [],
+      "neighbors": [],
+      "afiSafi": { "ipv4": true, "ipv6": false },
+      "policy": { "routeMaps": [], "communityLists": [], "asPathLists": [], "prefixLists": [] },
+      "timers": { "keepalive": 60, "hold": 180, "connectRetry": 120 },
+      "knobs": {}
+    },
+    {
+      "id": "r3",
+      "name": "R3",
+      "asn": 65200,
+      "routerId": "203.0.113.3",
+      "loopbacks": ["203.0.113.3"],
+      "interfaces": [],
+      "neighbors": [],
+      "afiSafi": { "ipv4": true, "ipv6": false },
+      "policy": { "routeMaps": [], "communityLists": [], "asPathLists": [], "prefixLists": [] },
+      "timers": { "keepalive": 60, "hold": 180, "connectRetry": 120 },
+      "knobs": {}
+    }
+  ],
+  "neighbors": [
+    {
+      "id": "n1",
+      "localRouterId": "r1",
+      "peerRouterId": "r2",
+      "localAs": 65000,
+      "peerAs": 65100,
+      "sessionType": "eBGP",
+      "families": ["ipv4"],
+      "inRouteMaps": [],
+      "outRouteMaps": []
+    },
+    {
+      "id": "n2",
+      "localRouterId": "r2",
+      "peerRouterId": "r1",
+      "localAs": 65100,
+      "peerAs": 65000,
+      "sessionType": "eBGP",
+      "families": ["ipv4"],
+      "inRouteMaps": [],
+      "outRouteMaps": []
+    },
+    {
+      "id": "n3",
+      "localRouterId": "r1",
+      "peerRouterId": "r3",
+      "localAs": 65000,
+      "peerAs": 65200,
+      "sessionType": "eBGP",
+      "families": ["ipv4"],
+      "inRouteMaps": [],
+      "outRouteMaps": []
+    },
+    {
+      "id": "n4",
+      "localRouterId": "r3",
+      "peerRouterId": "r1",
+      "localAs": 65200,
+      "peerAs": 65000,
+      "sessionType": "eBGP",
+      "families": ["ipv4"],
+      "inRouteMaps": [],
+      "outRouteMaps": []
+    }
+  ],
+  "initialRibs": [
+    {
+      "routerId": "r2",
+      "entry": {
+        "prefix": "30.0.0.0/24",
+        "pathAttributes": {
+          "origin": "igp",
+          "asPath": [],
+          "localPref": 200,
+          "med": 50
+        },
+        "source": "local",
+        "nextHop": "0.0.0.0",
+        "ageMs": 0
+      }
+    },
+    {
+      "routerId": "r3",
+      "entry": {
+        "prefix": "30.0.0.0/24",
+        "pathAttributes": {
+          "origin": "igp",
+          "asPath": [],
+          "localPref": 100,
+          "med": 100
+        },
+        "source": "local",
+        "nextHop": "0.0.0.0",
+        "ageMs": 0
+      }
+    }
+  ]
+}
